@@ -1,0 +1,52 @@
+Log:
+UPC   |   ACTION   |   TIME
+
+Cache:
+UPC   |   TIME   | ... | dumps
+
+
+
+Logger(x, action)
+	if !cacheContains(x):
+		queueAppend(x) # this is so that it can be added to the cache
+	logAppend(x, action)
+
+
+
+Spider()
+	while True:
+		if !queueIsEmpty():
+			x = queuePeak()
+			if !cacheContains(x):
+				content = lookupPool.lookup(x)
+				cacheAppend(x, content)
+			queuePop()
+		sleep(K)
+
+
+SheetsObj:
+	Member Variables:
+		SheetIDString
+		LogName
+		LogID
+		QueueName
+		QueueID
+		CacheName
+		CacheID
+		service
+
+	Methods:
+		bool cacheContains(x)
+		bool queueIsEmpty()
+		int  queuePeak()
+		void logAppend(x, action)
+		void queueAppend(x)
+		void cacheAppend(x, content)
+		void queuePop()
+
+NOT NEEDED:
+		content cacheLookup(x)
+
+		
+
+

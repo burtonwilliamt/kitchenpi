@@ -1,28 +1,12 @@
 from sheets import *
 from IPython import embed
-import ConfigParser
 #from graphics import *
 
 def main():
 
-    config = ConfigParser.RawConfigParser()
-    config.read('kitchen.cfg')
-
-    SPREADSHEETID = config.get('General', 'spreadsheet_id')
-    INVENTORYNAME = config.get('General', 'inventory_sheet_name')
-    CACHENAME = config.get('General', 'cache_sheet_name')
-    CACHEID = config.getint('General', 'cache_grid_id')
-    QUEUENAME = config.get('General', 'queue_sheet_name')
-    QUEUEID = config.getint('General', 'queue_grid_id')
-
-    service = getService()
-
-    val = popRow(service, SPREADSHEETID, QUEUENAME, QUEUEID)
-
-    embed()
-
+    so = SheetsObj("kitchen.cfg")
     upc = 35200264013
-
+    so.logAppend(upc, 1)
     # append(service, SPREADSHEETID, INVENTORYNAME, CACHENAME, CACHEID, upc)
 
     """
